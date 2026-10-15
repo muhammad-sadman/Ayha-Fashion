@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Delivery slip</title>
+<style>
+  body{font:14px/1.45 Arial,Helvetica,sans-serif;color:#111;margin:0;padding:16px;background:#f3f3f3}
+  .bar{max-width:720px;margin:0 auto 12px;display:flex;gap:10px}
+  .bar button{padding:8px 16px;border:0;background:#10392b;color:#e8c27a;border-radius:6px;font-size:14px;cursor:pointer}
+  .slip{max-width:720px;margin:0 auto 16px;background:#fff;border:1px dashed #666;padding:18px 22px;page-break-after:always;break-inside:avoid}
+  .slip:last-child{page-break-after:auto}
+  h1{margin:0;font-size:22px;color:#10392b}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:2px solid #10392b;padding-bottom:8px;margin-bottom:10px}
+  .no{font-size:18px;font-weight:700;text-align:right}
+  table{width:100%;border-collapse:collapse;margin:10px 0}
+  th,td{border-bottom:1px solid #ddd;padding:6px 4px;text-align:left}
+  th:last-child,td:last-child,th:nth-child(2),td:nth-child(2){text-align:right}
+  .tot td{border:0;padding:2px 4px}
+  .collect{margin-top:10px;padding:10px;border:2px solid #111;font-size:18px;font-weight:700;text-align:center}
+  .to{font-size:16px}
+  @media print{body{background:#fff;padding:0}.bar{display:none}.slip{border:1px dashed #666;margin:0 auto 12px}}
+</style>
+</head>
+<body>
+<div class="bar"><button onclick="window.print()">Print</button><button onclick="history.back()">Back</button></div>
+{% for o in orders %}
+<div class="slip">
+  <div class="top">
+    <div><h1>Ayha BD</h1><div>ayhabd.com</div></div>
+    <div class="no">{{ o.order_no }}<br><span style="font-weight:400;font-size:12px">{{ o.created_at|date:"d M Y, H:i" }}</span></div>
+  </div>
+  <div class="to">
+    <b>{{ o.customer_name }}</b><br>
+    {{ o.phone }}<br>
+    {{ o.address|linebreaksbr }}<br>
+    <span style="font-size:12px">{{ o.get_area_display }}</span>
+  </div>
+  <table>
+    <tr><th>Item</th><th>Qty</th><th>Amount</th></tr>
+    {% for i in o.items.all %}
+    <tr><td>{{ i.name }}</td><td>{{ i.quantity }}</td><td>&#2547;{{ i.line_total }}</td></tr>
+    {% endfor %}
+  </table>
+  <table class="tot">
+    <tr><td>Subtotal</td><td>&#2547;{{ o.subtotal }}</td></tr>
+    <tr><td>Delivery</td><td>&#2547;{{ o.shipping_fee }}</td></tr>
+    {% if o.discount %}<tr><td>Discount {{ o.promo_code }}</td><td>-&#2547;{{ o.discount }}</td></tr>{% endif %}
+    <tr><td><b>Total</b></td><td><b>&#2547;{{ o.total }}</b></td></tr>
+  </table>
+  {% if o.payment_method == "cod" %}
+    <div class="collect">COLLECT FROM CUSTOMER: &#2547;{{ o.total }}</div>
+  {% elif o.payment_verified %}
+    <div class="collect">PAID BY bKASH (verified): collect &#2547;0</div>
+  {% else %}
+    <div class="collect">bKASH NOT VERIFIED YET: do not ship until checked<br><span style="font-size:13px;font-weight:400">TrxID {{ o.bkash_trx_id }}, from {{ o.bkash_number }}</span></div>
+  {% endif %}
+  {% if o.note %}<p><b>Customer note:</b> {{ o.note }}</p>{% endif %}
+</div>
+{% endfor %}
+</body>
+</html>

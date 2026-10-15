@@ -1,0 +1,6 @@
+Django>=5.2,<6.2
+Pillow>=10.0
+whitenoise>=6.6
+gunicorn>=22.0
+# Only if you switch to PostgreSQL (DB_ENGINE=postgres in .env):
+# psycopg[binary]>=3.1

@@ -1,0 +1,71 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ayha BD</title>
+<meta name="description" content="Ayha BD: everyday fashion delivered across Bangladesh. Cash on delivery and bKash.">
+<meta name="theme-color" content="#10392b">
+<meta property="og:title" content="Ayha BD">
+<meta property="og:description" content="Everyday fashion delivered across Bangladesh. Cash on delivery and bKash.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="{% static 'shop/images/favicon.svg' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hind+Siliguri:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+</head>
+<body>
+
+<header class="main"><div class="wrap hrow">
+  <button class="logo" data-go="home" aria-label="Home"><b id="brandName">Ayha</b><small id="brandTag">Style made simple</small></button>
+  <form class="search" id="searchForm" role="search">
+    <input id="q" type="search" placeholder="I'm Shopping for ..." aria-label="Search products">
+    <button type="submit" aria-label="Search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+  </form>
+  <div class="icons">
+    <button class="ibtn" id="favBtn" aria-label="Wishlist"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-8-5.3-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.7-8 11-8 11z"/></svg><span class="badge" id="favCount" hidden>0</span></button>
+    <button class="ibtn" data-go="checkout" aria-label="Cart"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" id="cartCount" hidden>0</span></button>
+  </div>
+</div>
+<div class="nav"><div class="wrap">
+  <nav class="links" aria-label="Main">
+    <button data-go="home" id="nHome">Home</button>
+    <button data-go="shop" id="nShop">Shop</button>
+    <button data-go="about" id="nAbout">About Us</button>
+    <button data-go="contact" id="nContact">Contact Us</button>
+  </nav>
+</div></div></header>
+
+<div class="catbar"><div class="wrap">
+  <div class="ctabs" id="ctabs" role="tablist" aria-label="Categories"></div>
+  <div class="pills" id="pills" hidden></div>
+</div></div>
+
+<main id="view"><div class="wrap"><p class="empty" id="loading">Loading the shop...</p><noscript><p>Please turn on JavaScript to browse and order.</p></noscript></div></main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="logo" style="margin-bottom:12px"><b id="fBrand">Ayha</b><small id="fTag">Style made simple</small></div>
+      <p id="fText" style="margin:0;max-width:36ch;opacity:.9"></p>
+      <div class="social">
+        <a data-social="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8.5h2.9l.5-3.4h-3.4V8c0-1 .3-1.7 1.8-1.7H17V3.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.4v2.5H7.2v3.4h2.9V22z"/></svg></a>
+        <a data-social="youtube" href="#" target="_blank" rel="noopener" aria-label="YouTube" hidden><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4.5" fill="currentColor"/><path d="m10 9 5.2 3L10 15z" fill="#fbf6ea"/></svg></a>
+        <a data-social="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+    <div><h4>Information</h4><ul>
+      <li><a href="#/about" data-go="about">About Us</a></li><li><a href="#/contact" data-go="contact">Contact Us</a></li><li><a href="#/shop" data-go="shop">Shop</a></li></ul></div>
+    <div><h4>Contact Information</h4><ul>
+      <li id="fPhone"></li><li id="fEmail"></li><li id="fAddr"></li></ul></div>
+  </div>
+  <div class="copy">&copy; <span id="year">2026</span> <span id="fCopy">Ayha</span>. All rights reserved.</div>
+</footer>
+
+<a class="chat" id="chatBtn" href="#" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp" hidden><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1zm4 5v2h8V9zm0 3v2h5v-2z"/></svg></a>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="{% static 'shop/js/app.js' %}" defer></script>
+</body>
+</html>

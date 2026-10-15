@@ -1,0 +1,34 @@
+{% extends "admin/change_list.html" %}
+{% block content_title %}
+{{ block.super }}
+{% if stats %}
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0 20px">
+  <div style="border:1px solid var(--hairline-color,#ddd);border-radius:8px;padding:12px">
+    <div style="font-size:12px;opacity:.7">TODAY</div>
+    <div style="font-size:22px;font-weight:600">&#2547;{{ stats.today.revenue }}</div>
+    <div style="font-size:12px">{{ stats.today.orders }} order{{ stats.today.orders|pluralize }}</div>
+  </div>
+  <div style="border:1px solid var(--hairline-color,#ddd);border-radius:8px;padding:12px">
+    <div style="font-size:12px;opacity:.7">LAST 7 DAYS</div>
+    <div style="font-size:22px;font-weight:600">&#2547;{{ stats.week.revenue }}</div>
+    <div style="font-size:12px">{{ stats.week.orders }} order{{ stats.week.orders|pluralize }}</div>
+  </div>
+  <div style="border:1px solid var(--hairline-color,#ddd);border-radius:8px;padding:12px">
+    <div style="font-size:12px;opacity:.7">THIS MONTH</div>
+    <div style="font-size:22px;font-weight:600">&#2547;{{ stats.month.revenue }}</div>
+    <div style="font-size:12px">{{ stats.month.orders }} order{{ stats.month.orders|pluralize }}</div>
+  </div>
+  <div style="border:1px solid #c9983f;border-radius:8px;padding:12px">
+    <div style="font-size:12px;opacity:.7">NEW, NOT PROCESSED</div>
+    <div style="font-size:22px;font-weight:600">{{ stats.new }}</div>
+    <div style="font-size:12px">filter: Status = New</div>
+  </div>
+  <div style="border:1px solid #e2136e;border-radius:8px;padding:12px">
+    <div style="font-size:12px;opacity:.7">bKash TO VERIFY</div>
+    <div style="font-size:22px;font-weight:600">{{ stats.unverified }}</div>
+    <div style="font-size:12px">check TrxID in bKash</div>
+  </div>
+</div>
+<p style="font-size:12px;opacity:.7;margin:-8px 0 12px">Sales figures exclude cancelled and returned orders.</p>
+{% endif %}
+{% endblock %}

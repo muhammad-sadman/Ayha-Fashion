@@ -1,0 +1,19 @@
+# systemd service. Save as /etc/systemd/system/ayha.service, then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now ayha
+# Replace /srv/ayha and the user name to match your server.
+[Unit]
+Description=Ayha BD shop (gunicorn)
+After=network.target
+
+[Service]
+User=ayha
+Group=www-data
+WorkingDirectory=/srv/ayha
+EnvironmentFile=/srv/ayha/.env
+RuntimeDirectory=ayha
+ExecStart=/srv/ayha/venv/bin/gunicorn ayha_project.wsgi:application \
+    --workers 3 --bind unix:/run/ayha/gunicorn.sock --access-logfile - --error-logfile -
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
